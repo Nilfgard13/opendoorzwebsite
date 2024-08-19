@@ -7,9 +7,9 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', function () {
-    return view('dashboard');
+    return view('dashboard', ['title' => 'OAS+ | Rotator Management']);
 });
 
 Route::get('/profile', function () {
-    return view('profile');
+    return view('profile', ['title' => 'OAS+ | Admin Profile']);
 });
