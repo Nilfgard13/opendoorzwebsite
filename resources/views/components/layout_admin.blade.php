@@ -50,7 +50,9 @@
                             <x-navbar href="/profile">Admin Profile</x-navbar>
                         </ul>
                     </li>
-
+                    <li>
+                        <a href="grid_options.html"><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span></a>
+                    </li>
                 </ul>
 
             </div>

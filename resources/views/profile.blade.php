@@ -123,21 +123,11 @@
                         <div class="feed-activity-list">
 
                             <div class="feed-element">
-                                <a href="#" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a1.jpg">
-                                </a>
                                 <div class="media-body ">
-                                    <small class="pull-right text-navy">1m ago</small>
-                                    <strong>Sandra Momot</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
-                                    <div class="actions">
-                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                        <a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> Love</a>
-                                    </div>
+                                    <p class="text-center">Coming Soon...</p>
                                 </div>
                             </div>
-
-                            <div class="feed-element">
+                            {{-- <div class="feed-element">
                                 <a href="#" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/profile.jpg">
                                 </a>
@@ -148,7 +138,6 @@
 
                                 </div>
                             </div>
-
                             <div class="feed-element">
                                 <a href="#" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/a2.jpg">
@@ -244,7 +233,7 @@
                                     <br>
                                     <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Show
