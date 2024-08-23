@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\nomors;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', function () {
-    return view('dashboard', ['title' => 'OAS+ | Rotator Management']);
+    return view('dashboard', ['title' => 'OAS+ | Rotator Management', 'nomor' => nomors::latest()->get()]);
 });
 
 Route::get('/profile', function () {

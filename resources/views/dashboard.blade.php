@@ -171,7 +171,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending"
-                                                style="width: 297.021px;">Select</th>
+                                                style="width: 30px;">Select</th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending"
@@ -190,16 +190,20 @@
                                                 style="width: 146.906px;">Updated At</th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody>
+                                        @forelse ($nomor as $nomors)
                                         <tr class="gradeA odd" role="row">
                                             <td class="sorting_1">
                                                 <input type="checkbox" name="select_gecko" value="Gecko">
                                             </td>
-                                            <td>Firefox 1.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td class="center">1.7</td>
-                                            <td class="center">A</td>
+                                            <td>{{ $nomors['name'] }}</td>
+                                            <td>{{ $nomors['nomor'] }}</td>
+                                            <td class="center">{{ $nomors['created_at'] }}</td>
+                                            <td class="center">{{ $nomors['updated_at'] }}</td>
                                         </tr>
+                                        @empty
+                                        @endforelse
                                     </tbody>
                                     {{-- <tfoot>
                                         <tr>
