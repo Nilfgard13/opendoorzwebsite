@@ -21,13 +21,13 @@
                                         </button>
 
                                         <!-- Button Edit -->
-                                        <button type="button" class="btn btn-outline btn-success" data-toggle="modal"
-                                            data-target="#editModal">
+                                        <button id="editSelected" type="button" class="btn btn-outline btn-success"
+                                            data-toggle="modal" data-target="#editModal">
                                             Edit
                                         </button>
 
                                         <!-- Button Delete -->
-                                        <button type="button" class="btn btn-outline btn-danger" data-toggle="modal"
+                                        <button id="deleteSelected" type="button" class="btn btn-outline btn-danger" data-toggle="modal"
                                             data-target="#deleteModal">
                                             Delete
                                         </button>
@@ -48,29 +48,30 @@
                                             </div>
                                             <div class="modal-body">
                                                 <!-- Form content for adding -->
-                                                <form class="text-center">
+                                                <form class="text-center" action="{{ route('nomors.store') }}"
+                                                    method="POST">
+                                                    @csrf
                                                     <div class="form-group">
-                                                        <label for="itemName">Name </label>
-                                                        <input type="text" class="form-control" id="itemName"
-                                                            placeholder="Enter name">
+                                                        <label for="itemName">Name</label>
+                                                        <input type="text" class="form-control" name="name"
+                                                            id="itemName" placeholder="Enter name">
                                                     </div>
                                                     <br>
-                                                    <br>
-
                                                     <div class="form-group">
-                                                        <label for="itemName">No HP</label>
-                                                        <input type="number" class="form-control" id="itemName"
-                                                            placeholder="Enter the number">
+                                                        <label for="itemNomor">No HP</label>
+                                                        <input type="number" class="form-control" name="nomor"
+                                                            id="itemNomor" placeholder="Enter the number">
                                                     </div>
-                                                    <!-- Add other fields as needed -->
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
                                                 </form>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -86,14 +87,20 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete this item?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </div>
+                                            <form id="deleteForm" action="{{ route('nomors.multiDelete') }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete the selected items?
+                                                    <input type="hidden" name="ids" id="delete_ids">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -104,39 +111,31 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
+                                                <h5 class="modal-title" id="editModalLabel">Edit Selected Items</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <!-- Form content for editing -->
-                                                <form class="text-center">
-                                                    <div class="form-group">
-                                                        <label for="itemName">Name </label>
-                                                        <input type="text" class="form-control" id="itemName"
-                                                            placeholder="Enter name">
-                                                    </div>
-                                                    <br>
-                                                    <br>
-
-                                                    <div class="form-group">
-                                                        <label for="itemName">No HP</label>
-                                                        <input type="number" class="form-control" id="itemName"
-                                                            placeholder="Enter the number">
-                                                    </div>
-                                                    <!-- Add other fields as needed -->
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-success">Save changes</button>
-                                            </div>
+                                            <form id="editForm" action="{{ route('nomors.multiUpdate') }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body" id="editModalBody">
+                                                    <!-- Dynamic form inputs will be added here -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-success">Save
+                                                        changes</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
+
+
 
                                 {{-- <div class="dataTables_length" id="DataTables_Table_0_length"><label>Show
                                         <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
@@ -171,7 +170,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending"
-                                                style="width: 30px;">Select</th>
+                                                style="width: 30px;">
+                                                <input type="checkbox" id="select-all">
+                                            </th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending"
@@ -190,21 +191,23 @@
                                                 style="width: 146.906px;">Updated At</th>
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
-                                        @forelse ($nomor as $nomors)
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">
-                                                <input type="checkbox" name="select_gecko" value="Gecko">
-                                            </td>
-                                            <td>{{ $nomors['name'] }}</td>
-                                            <td>{{ $nomors['nomor'] }}</td>
-                                            <td class="center">{{ $nomors['created_at'] }}</td>
-                                            <td class="center">{{ $nomors['updated_at'] }}</td>
-                                        </tr>
+                                        @forelse ($nomors as $nomor)
+                                            <tr class="gradeA odd" role="row">
+                                                <td class="sorting_1">
+                                                    <input type="checkbox" name="select_gecko" class="select-item"
+                                                        value="{{ $nomor->id }}">
+                                                </td>
+                                                <td>{{ $nomor['name'] }}</td>
+                                                <td>{{ $nomor['nomor'] }}</td>
+                                                <td class="center">{{ $nomor['created_at'] }}</td>
+                                                <td class="center">{{ $nomor['updated_at'] }}</td>
+                                            </tr>
                                         @empty
                                         @endforelse
                                     </tbody>
+
                                     {{-- <tfoot>
                                         <tr>
                                             <th rowspan="1" colspan="1">Rendering engine</th>

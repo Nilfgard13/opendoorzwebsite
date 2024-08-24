@@ -51,7 +51,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="grid_options.html"><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span></a>
+                        <a href="grid_options.html"><i class="fa fa-sign-out"></i> <span class="nav-label">Log
+                                out</span></a>
                     </li>
                 </ul>
 
@@ -64,12 +65,12 @@
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
                                 class="fa fa-bars"></i> </a>
-                        <form role="search" class="navbar-form-custom" action="search_results.html">
+                        {{-- <form role="search" class="navbar-form-custom" action="search_results.html">
                             <div class="form-group">
                                 <input type="text" placeholder="Search for something..." class="form-control"
                                     name="top-search" id="top-search">
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
@@ -380,6 +381,97 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners to all table rows
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                row.addEventListener('click', function(event) {
+                    // Check if the click was not on a checkbox
+                    if (!event.target.classList.contains('select-item')) {
+                        // Find the checkbox within this row
+                        const checkbox = this.querySelector('.select-item');
+
+                        if (checkbox) {
+                            // Toggle the checkbox checked state
+                            checkbox.checked = !checkbox.checked;
+                        }
+                    }
+                });
+            });
+
+            // Handle "Select All" checkbox
+            document.getElementById('select-all').addEventListener('click', function() {
+                const isChecked = this.checked;
+                const checkboxes = document.querySelectorAll('.select-item');
+
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                });
+            });
+        });
+
+        document.getElementById('editSelected').onclick = function() {
+            var checkboxes = document.getElementsByClassName('select-item');
+            var selectedIds = [];
+            var modalBody = document.getElementById('editModalBody');
+            modalBody.innerHTML = ''; // Clear previous content
+
+            for (var checkbox of checkboxes) {
+                if (checkbox.checked) {
+                    selectedIds.push(checkbox.value);
+                    var row = checkbox.closest('tr');
+                    var name = row.cells[1].innerText;
+                    var nomor = row.cells[2].innerText;
+
+                    var html = `
+                   <div class="form-group mb-3">
+                        <input type="hidden" name="selected_ids[]" value="${checkbox.value}">
+                        <label for="name-${checkbox.value}" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name-${checkbox.value}" name="name[${checkbox.value}]" value="${name}">
+                    </div>
+                    
+                    <div class="form-group mb-4">
+                        <label for="nomor-${checkbox.value}" class="form-label">Nomor</label>
+                        <input type="text" class="form-control" id="nomor-${checkbox.value}" name="nomor[${checkbox.value}]" value="${nomor}">
+                    </div>
+
+                    <hr class="my-4">
+
+                `;
+                    modalBody.innerHTML += html;
+                }
+            }
+
+            if (selectedIds.length === 0) {
+                alert('Please select at least one item to edit.');
+                return false;
+            }
+        };
+    </script>
+
+    <script>
+        document.getElementById('deleteSelected').onclick = function() {
+            var checkboxes = document.getElementsByClassName('select-item');
+            var selectedIds = [];
+
+            for (var checkbox of checkboxes) {
+                if (checkbox.checked) {
+                    selectedIds.push(checkbox.value);
+                }
+            }
+
+            if (selectedIds.length === 0) {
+                alert('Please select at least one item to delete.');
+                return false;
+            }
+
+            document.getElementById('delete_ids').value = selectedIds.join(',');
+        };
+    </script>
+
 </body>
 
 </html>
