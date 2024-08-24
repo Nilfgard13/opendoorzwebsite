@@ -10,7 +10,7 @@ class nomors extends Controller
     // Menampilkan daftar nomor
     public function index()
     {
-        $nomors = Nomor::latest()->get();
+        $nomors = Nomor::all();
         return view('dashboard', ['title' => 'OAS+ | Rotator Management', 'nomors' => $nomors]);
     }
 
@@ -65,6 +65,39 @@ class nomors extends Controller
 
         return redirect()->route('nomors.index')->with('success', 'Selected items deleted successfully.');
     }
+
+    // public function search(Request $request)
+    // {
+    //     $query = $request->input('query');
+
+    //     $results = Nomor::where('name', 'LIKE', "%{$query}%")
+    //         ->orWhere('nomor', 'LIKE', "%{$query}%")
+    //         ->get();
+
+    //     return view('search', [
+    //         'title' => 'OAS+ | Rotator Management',
+    //         'results' => $results,
+    //         'query' => $query
+    //     ]);
+    // }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $results = Nomor::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('nomor', 'LIKE', "%{$query}%")
+            ->get();
+
+        $nomors = $results; // Or you can load all nomors if $results is empty
+
+        return view('dashboard', [
+            'title' => 'OAS+ | Rotator Management',
+            'nomors' => $nomors,
+            'results' => $results,
+            'query' => $query
+        ]);
+    }
+
 
     // Menampilkan form untuk mengedit nomor
     // public function edit(Nomor $nomor)

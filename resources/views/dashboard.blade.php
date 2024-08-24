@@ -27,8 +27,8 @@
                                         </button>
 
                                         <!-- Button Delete -->
-                                        <button id="deleteSelected" type="button" class="btn btn-outline btn-danger" data-toggle="modal"
-                                            data-target="#deleteModal">
+                                        <button id="deleteSelected" type="button" class="btn btn-outline btn-danger"
+                                            data-toggle="modal" data-target="#deleteModal">
                                             Delete
                                         </button>
                                     </div>
@@ -146,17 +146,19 @@
                                             <option value="100">100</option>
                                         </select> entries</label></div> --}}
                                 <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                    <label>
-                                        Search:
-                                        <div class="input-group">
-                                            <input type="search" class="form-control input-sm" placeholder=""
-                                                aria-controls="DataTables_Table_0">
-                                            <span class="input-group-btn">
-                                                <button type="submit" class="btn btn-primary btn-sm">Search</button>
-                                            </span>
-                                        </div>
-
-                                    </label>
+                                    <form action="{{ route('search') }}" method="GET">
+                                        <label>
+                                            Search:
+                                            <div class="input-group">
+                                                <input type="search" name="query" class="form-control input-sm"
+                                                    placeholder="" aria-controls="DataTables_Table_0">
+                                                <span class="input-group-btn">
+                                                    <button type="submit"
+                                                        class="btn btn-primary btn-sm">Search</button>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </form>
                                 </div>
 
                                 <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
@@ -168,56 +170,49 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Browser: activate to sort column ascending"
-                                                style="width: 30px;">
+                                                rowspan="1" colspan="1" style="width: 30px;">
                                                 <input type="checkbox" id="select-all">
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Browser: activate to sort column ascending"
-                                                style="width: 297.021px;">Name</th>
+                                                rowspan="1" colspan="1" style="width: 297.021px;">Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending"
-                                                style="width: 267.073px;">No HP</th>
+                                                rowspan="1" colspan="1" style="width: 267.073px;">No HP</th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Engine version: activate to sort column ascending"
-                                                style="width: 205.552px;">Created At</th>
+                                                rowspan="1" colspan="1" style="width: 205.552px;">Created At
+                                            </th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                rowspan="1" colspan="1"
-                                                aria-label="CSS grade: activate to sort column ascending"
-                                                style="width: 146.906px;">Updated At</th>
+                                                rowspan="1" colspan="1" style="width: 146.906px;">Updated At
+                                            </th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
-                                        @forelse ($nomors as $nomor)
+                                        @forelse ($nomors as $item)
                                             <tr class="gradeA odd" role="row">
                                                 <td class="sorting_1">
                                                     <input type="checkbox" name="select_gecko" class="select-item"
-                                                        value="{{ $nomor->id }}">
+                                                        value="{{ $item->id }}">
                                                 </td>
-                                                <td>{{ $nomor['name'] }}</td>
-                                                <td>{{ $nomor['nomor'] }}</td>
-                                                <td class="center">{{ $nomor['created_at'] }}</td>
-                                                <td class="center">{{ $nomor['updated_at'] }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->nomor }}</td>
+                                                <td class="center">{{ $item->created_at }}</td>
+                                                <td class="center">{{ $item->updated_at }}</td>
                                             </tr>
                                         @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center">No data available.</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
-
-                                    {{-- <tfoot>
-                                        <tr>
-                                            <th rowspan="1" colspan="1">Rendering engine</th>
-                                            <th rowspan="1" colspan="1">Browser</th>
-                                            <th rowspan="1" colspan="1">Platform(s)</th>
-                                            <th rowspan="1" colspan="1">Engine version</th>
-                                            <th rowspan="1" colspan="1">CSS grade</th>
-                                        </tr>
-                                    </tfoot> --}}
                                 </table>
+                                <form action="{{ route('nomors.search') }}" method="GET"
+                                    class="form-inline my-2 my-lg-0">
+                                    <!-- Clear Search Button -->
+                                    @if (request('query'))
+                                        <a href="{{ route('nomors.index') }}"
+                                            class="btn btn-outline-danger my-2 my-sm-0 ml-2">Clear Search</a>
+                                    @endif
+                                </form>
+
                                 {{-- <div class="dataTables_paginate paging_simple_numbers"
                                     id="DataTables_Table_0_paginate">
                                     <ul class="pagination">
