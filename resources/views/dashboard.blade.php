@@ -250,26 +250,58 @@
                     <h5>Link Generator</h5>
 
                     <div class="ibox-content">
-                        <div class="table-responsive text-center">
-                            <p>Click button below for generating link</p>
-                            <button type="button" class="btn btn-primary btn-lg my-4">Generate Link WA
-                                Rotator</button>
-                        </div>
-                        <p>Generate Link Result : </p>
-                        <div class="input-group">
-                            <input type="text" class="form-control">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-primary">
-                                    <i class="fa fa-copy"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <hr>
-                        <div class="table-responsive text-center">
-                            <p>Check Generated Link</p>
-                            <button type="button" class="btn btn-primary btn-md my-4">Test</button>
-                        </div>
+                        {{-- <form method="GET" action="{{ route('nomors.generateLink') }}">
+                            <div class="table-responsive text-center">
+                                <p>Click button below for generating link</p>
+                                <button type="submit" class="btn btn-primary btn-lg my-4">Generate Link WA
+                                    Rotator</button>
+                            </div>
+                        </form> --}}
+
+                        {{-- Menampilkan hasil generated link jika ada --}}
+                        {{-- @if (session('generated_url')) --}}
+                            <p>Generate Link Result:</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                    value="{{ url(route('nomors.showLink')) }}" readonly>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="copyToClipboard('{{ url(route('nomors.showLink')) }}')">
+                                        <i class="fa fa-copy"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="table-responsive text-center">
+                                <p>Check Generated Link</p>
+                                <a href="{{ url(route('nomors.showLink')) }}" target="_blank"
+                                    class="btn btn-primary btn-md my-4">Test</a>
+                            </div>
+                        {{-- @endif --}}
+
+                        {{-- Menampilkan hasil lama jika ada --}}
+                        {{-- @if (isset($url))
+                            <p>Generate Link Result :</p>
+                            <form>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="{{ $url }}" readonly>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="copyToClipboard('{{ $url }}')">
+                                            <i class="fa fa-copy"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                            <hr>
+                            <div class="table-responsive text-center">
+                                <p>Check Generated Link</p>
+                                <a href="{{ $url }}" target="_blank"
+                                    class="btn btn-primary btn-md my-4">Test</a>
+                            </div>
+                        @endif --}}
                     </div>
+
                 </div>
 
             </div>

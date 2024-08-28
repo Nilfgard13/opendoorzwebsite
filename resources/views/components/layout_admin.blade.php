@@ -472,6 +472,43 @@
         };
     </script>
 
+    <script>
+        function copyToClipboard(text) {
+            var tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+        }
+    </script>
+
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#generateLink').click(function() {
+                $.ajax({
+                    url: '{{ route('nomors.rotator') }}',
+                    type: 'GET',
+                    success: function(response) {
+                        $('#waLink').val(response.generated_url);
+                        $('#openLink').attr('href', response.generated_url);
+                        $('#linkResult').show();
+                    },
+                    error: function() {
+                        alert('Error generating link. Please try again.');
+                    }
+                });
+            });
+
+            $('#copyLink').click(function() {
+                $('#waLink').select();
+                document.execCommand('copy');
+                alert('Link copied to clipboard!');
+            });
+        });
+    </script> --}}
+
 </body>
 
 </html>

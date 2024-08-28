@@ -66,21 +66,6 @@ class nomors extends Controller
         return redirect()->route('nomors.index')->with('success', 'Selected items deleted successfully.');
     }
 
-    // public function search(Request $request)
-    // {
-    //     $query = $request->input('query');
-
-    //     $results = Nomor::where('name', 'LIKE', "%{$query}%")
-    //         ->orWhere('nomor', 'LIKE', "%{$query}%")
-    //         ->get();
-
-    //     return view('search', [
-    //         'title' => 'OAS+ | Rotator Management',
-    //         'results' => $results,
-    //         'query' => $query
-    //     ]);
-    // }
-
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -98,31 +83,83 @@ class nomors extends Controller
         ]);
     }
 
-
-    // Menampilkan form untuk mengedit nomor
-    // public function edit(Nomor $nomor)
+    // public function generateLink(Request $request)
     // {
-    //     return view('nomors.edit', compact('nomor'));
+    //     // Pesan teks yang akan dikirim
+    //     $text = "Halo Admin, Ingin beli produknya";
+
+    //     // Nomor WhatsApp admin dari tabel Nomor
+    //     $admins = Nomor::pluck('nomor')->toArray();
+
+    //     // File untuk menyimpan indeks admin saat ini
+    //     $indexFile = 'admin_index.txt';
+
+    //     // Inisialisasi indeks jika file tidak ada
+    //     if (!file_exists(storage_path($indexFile))) {
+    //         $currentIndex = 0;
+    //         file_put_contents(storage_path($indexFile), $currentIndex);
+    //     } else {
+    //         $currentIndex = (int)file_get_contents(storage_path($indexFile));
+    //     }
+
+    //     // Pilih admin berikutnya
+    //     $adminNumber = $admins[$currentIndex];
+
+    //     // Perbarui indeks untuk pengguna berikutnya
+    //     $nextIndex = ($currentIndex + 1) % count($admins);
+    //     file_put_contents(storage_path($indexFile), $nextIndex);
+
+    //     // Buat URL WhatsApp
+    //     $url = "https://api.whatsapp.com/send?phone=" . $adminNumber . "&text=" . urlencode($text);
+
+    //     // Alihkan pengguna langsung ke URL WhatsApp
+    //     return redirect()->away($url);
     // }
 
-    // // Mengupdate data nomor
-    // public function update(Request $request, Nomor $nomor)
-    // {
-    //     $validated = $request->validate([
-    //         'name' => 'required|string|max:125',
-    //         'nomor' => 'required|string|max:16',
-    //     ]);
 
-    //     $nomor->update($validated);
+    public function generateLink()
+    {
+        // Text message to be sent
+        $text = "Halo Admin, Ingin beli produknya";
 
-    //     return redirect()->route('nomors.index')->with('success', 'Nomor updated successfully.');
-    // }
+        // Admin WhatsApp numbers from the Nomor table
+        $admins = Nomor::pluck('nomor')->toArray();
 
-    // // Menghapus nomor
-    // public function destroy(Nomor $nomor)
-    // {
-    //     $nomor->delete();
+        // File to store the current admin index
+        $indexFile = 'admin_index.txt';
 
-    //     return redirect()->route('nomors.index')->with('success', 'Nomor deleted successfully.');
-    // }
+        // Initialize index if file does not exist
+        if (!file_exists(storage_path($indexFile))) {
+            $currentIndex = 0;
+            file_put_contents(storage_path($indexFile), $currentIndex);
+        } else {
+            $currentIndex = (int)file_get_contents(storage_path($indexFile));
+        }
+
+        // Select the next admin
+        $adminNumber = $admins[$currentIndex];
+
+        // Update the index for the next user
+        $nextIndex = ($currentIndex + 1) % count($admins);
+        file_put_contents(storage_path($indexFile), $nextIndex);
+
+        // Generate the WhatsApp URL
+        $url = "https://api.whatsapp.com/send?phone=" . $adminNumber . "&text=" . urlencode($text);
+
+        // Save the generated URL to the session or pass it via a query parameter, if needed
+        session()->flash('generated_url', $url);
+
+        // Redirect to the route that displays the list of `nomors` with a success message
+        // return redirect($url);
+        return $url;
+    }
+
+    public function showlink()
+    {
+        // Call the generateLink method and get the URL
+        $url = $this->generateLink();  // or use $this->generateLink(); if it's in the same class
+
+        // Return the view with the generated URL
+        return redirect($url);
+    }
 }
