@@ -160,9 +160,9 @@
                                         </label>
                                     </form>
                                 </div>
-
+                                <br>
                                 <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
-                                    aria-live="polite">Showing 1 to 25 of 57 entries</div>
+                                    aria-live="polite">Penambahan no hp harus dengan format 62'No HP'</div>
                                 <table
                                     class="table table-striped table-bordered table-hover dataTables-example dataTable"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"
