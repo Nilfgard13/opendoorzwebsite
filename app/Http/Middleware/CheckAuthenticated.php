@@ -14,14 +14,12 @@ class CheckAuthenticated
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
-            // Jika belum login, redirect ke halaman login
             return redirect()->route('login');
         }
 
-        // Jika sudah login, lanjutkan request ke rute berikutnya
         return $next($request);
     }
 }

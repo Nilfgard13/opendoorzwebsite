@@ -35,7 +35,7 @@
                                 <li><a href="contacts.html">Contacts</a></li>
                                 {{-- <li><a href="mailbox.html">Mailbox</a></li> --}}
                                 <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="/logout">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -111,7 +111,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="login.html">
+                            <a href="{{ route('logout') }}">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
@@ -427,7 +427,7 @@
                     var nomor = row.cells[2].innerText;
 
                     var html = `
-                   <div class="form-group mb-3">
+                    <div class="form-group mb-3">
                         <input type="hidden" name="selected_ids[]" value="${checkbox.value}">
                         <label for="name-${checkbox.value}" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name-${checkbox.value}" name="name[${checkbox.value}]" value="${name}">
@@ -439,7 +439,6 @@
                     </div>
 
                     <hr class="my-4">
-
                 `;
                     modalBody.innerHTML += html;
                 }
@@ -447,8 +446,11 @@
 
             if (selectedIds.length === 0) {
                 alert('Please select at least one item to edit.');
-                return false;
+                return false; // Stop execution, don't show the modal
             }
+
+            // Show the modal since there is at least one selected checkbox
+            $('#editModal').modal('show');
         };
     </script>
 
@@ -465,10 +467,13 @@
 
             if (selectedIds.length === 0) {
                 alert('Please select at least one item to delete.');
-                return false;
+                return false; // Stop execution, don't show the modal
             }
 
             document.getElementById('delete_ids').value = selectedIds.join(',');
+
+            // Show the modal since there is at least one selected checkbox
+            $('#deleteModal').modal('show');
         };
     </script>
 
@@ -482,32 +487,6 @@
             document.body.removeChild(tempInput);
         }
     </script>
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#generateLink').click(function() {
-                $.ajax({
-                    url: '{{ route('nomors.rotator') }}',
-                    type: 'GET',
-                    success: function(response) {
-                        $('#waLink').val(response.generated_url);
-                        $('#openLink').attr('href', response.generated_url);
-                        $('#linkResult').show();
-                    },
-                    error: function() {
-                        alert('Error generating link. Please try again.');
-                    }
-                });
-            });
-
-            $('#copyLink').click(function() {
-                $('#waLink').select();
-                document.execCommand('copy');
-                alert('Link copied to clipboard!');
-            });
-        });
-    </script> --}}
 
 </body>
 

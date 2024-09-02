@@ -20,15 +20,12 @@
                                             Add
                                         </button>
 
-                                        <!-- Button Edit -->
-                                        <button id="editSelected" type="button" class="btn btn-outline btn-success"
-                                            data-toggle="modal" data-target="#editModal">
+                                        <button id="editSelected" type="button" class="btn btn-outline btn-success">
                                             Edit
                                         </button>
 
                                         <!-- Button Delete -->
-                                        <button id="deleteSelected" type="button" class="btn btn-outline btn-danger"
-                                            data-toggle="modal" data-target="#deleteModal">
+                                        <button id="deleteSelected" type="button" class="btn btn-outline btn-danger">
                                             Delete
                                         </button>
                                     </div>
@@ -134,7 +131,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
 
                                 {{-- <div class="dataTables_length" id="DataTables_Table_0_length"><label>Show
@@ -260,23 +256,23 @@
 
                         {{-- Menampilkan hasil generated link jika ada --}}
                         {{-- @if (session('generated_url')) --}}
-                            <p>Generate Link Result:</p>
-                            <div class="input-group">
-                                <input type="text" class="form-control"
-                                    value="{{ url(route('nomors.showLink')) }}" readonly>
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-primary"
-                                        onclick="copyToClipboard('{{ url(route('nomors.showLink')) }}')">
-                                        <i class="fa fa-copy"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <hr>
-                            <div class="table-responsive text-center">
-                                <p>Check Generated Link</p>
-                                <a href="{{ url(route('nomors.showLink')) }}" target="_blank"
-                                    class="btn btn-primary btn-md my-4">Test</a>
-                            </div>
+                        <p>Generate Link Result:</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" value="{{ url(route('nomors.showLink')) }}"
+                                readonly>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="copyToClipboard('{{ url(route('nomors.showLink')) }}')">
+                                    <i class="fa fa-copy"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <hr>
+                        <div class="table-responsive text-center">
+                            <p>Check Generated Link</p>
+                            <a href="{{ url(route('nomors.showLink')) }}" target="_blank"
+                                class="btn btn-primary btn-md my-4">Test</a>
+                        </div>
                         {{-- @endif --}}
 
                         {{-- Menampilkan hasil lama jika ada --}}
