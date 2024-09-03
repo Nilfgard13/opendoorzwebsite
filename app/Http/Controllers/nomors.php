@@ -11,7 +11,7 @@ class nomors extends Controller
     public function index()
     {
         $nomors = Nomor::all();
-        return view('dashboard', ['title' => 'OAS+ | Rotator Management', 'nomors' => $nomors]);
+        return view('dashboard', ['title' => 'OAS | Rotator Management', 'nomors' => $nomors]);
     }
 
     // Menampilkan form untuk membuat nomor baru
@@ -120,7 +120,7 @@ class nomors extends Controller
     public function generateLink()
     {
         // Text message to be sent
-        $text = "Halo Admin, Ingin beli produknya";
+        $text = "";
 
         // Admin WhatsApp numbers from the Nomor table
         $admins = Nomor::pluck('nomor')->toArray();

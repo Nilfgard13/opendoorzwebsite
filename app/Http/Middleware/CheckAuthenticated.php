@@ -16,10 +16,13 @@ class CheckAuthenticated
      */
     public function handle(Request $request, Closure $next)
     {
+        // Check if the user is authenticated
         if (!Auth::check()) {
+            // If the user is not authenticated, redirect to the login page
             return redirect()->route('login');
         }
 
+        // If the user is authenticated, proceed with the request
         return $next($request);
     }
 }

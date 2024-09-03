@@ -10,8 +10,8 @@ use App\Http\Controllers\RegisterController;
 
 Auth::routes();
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register-user');
+// Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+// Route::post('/register', [AuthController::class, 'register'])->name('register-user');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -38,6 +38,6 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/profile', function () {
-        return view('profile', ['title' => 'OAS+ | Admin Profile']);
+        return view('profile', ['title' => 'OAS | Admin Profile']);
     });
 });

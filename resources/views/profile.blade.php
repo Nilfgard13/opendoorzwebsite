@@ -13,16 +13,21 @@
                         <img alt="image" class="img-responsive" src="img/profile_big.jpg">
                     </div>
                     <div class="ibox-content profile-content">
-                        <h4><strong>Monica Smith</strong></h4>
-                        <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+                        <h4><strong>{{ Auth::user()->name }}</strong></h4>
+                        <p><i class="fa fa-envelope"></i> {{ Auth::user()->email }}</p>
                         <h5>
                             About me
                         </h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
+                            Located in the heart of Malang, our dedicated team of real estate professionals is committed
+                            to helping you find the perfect property that meets your needs and fits your budget. At
+                            Opendoorz, we pride ourselves on our personalized approach, ensuring that your journey to
+                            homeownership is as smooth and stress-free as possible.<br><br>
+
+                            Let's open the door to your dream home together. Reach out to us for a consultation, and
+                            let's make your real estate dreams a reality.
                         </p>
-                        <div class="row m-t-lg">
+                        {{-- <div class="row m-t-lg">
                             <div class="col-md-4">
                                 <span class="bar" style="display: none;">5,3,9,6,5,9,7,3,5,2</span><svg
                                     class="peity" height="16" width="32">
@@ -90,7 +95,7 @@
                                             class="fa fa-coffee"></i> Buy a coffee</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

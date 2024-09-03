@@ -4,21 +4,21 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h2 class="font-bold">Welcome to OAS+</h2>
+                <h2 class="font-bold">Welcome to <i>Opendoorz Rotator System</i></h2>
 
                 <p>
                     Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app
                     views.
                 </p>
 
-                <p>
+                {{-- <p>
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s.
                 </p>
 
                 <p>
                     When an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </p>
+                </p> --}}
 
                 <p>
                     <small>It has survived not only five centuries, but also the leap into electronic typesetting,
@@ -29,7 +29,7 @@
 
             <div class="col-md-6">
                 <div class="ibox-content">
-                    <h1 class="logo-name">OAS+</h1>
+                    <h1 class="logo-name">ORS</h1>
                     <form class="m-t" role="form" action="/login" method="POST">
                         @csrf
                         <div class="form-group">
@@ -42,14 +42,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
-                        <a href="/forget">
+                        {{-- <a href="/forget">
                             <small>Forgot password?</small>
-                        </a>
+                        </a> --}}
 
-                        <p class="text-muted text-center">
+                        {{-- <p class="text-muted text-center">
                             <small>Do not have an account?</small>
                         </p>
-                        <a class="btn btn-sm btn-white btn-block" href="{{ route('register') }}">Create an account</a>
+                        <a class="btn btn-sm btn-white btn-block" href="{{ route('register') }}">Create an account</a> --}}
                     </form>
 
                     <p class="m-t">
@@ -61,7 +61,10 @@
         <hr />
         <div class="row">
             <div class="col-md-6">
-                Copyright Example Company
+                <footer class="text-center py-3">
+                    <p>&copy; {{ date('Y') }} Opendoorz Real Estate. All rights reserved.</p>
+                </footer>
+                
             </div>
 
         </div>

@@ -11,12 +11,12 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('index', ['title' => 'OAS+ | Rotator Management']);
+        return view('index', ['title' => 'OAS | Login']);
     }
 
     public function showRegisterForm()
     {
-        return view('register', ['title' => 'OAS+ | Rotator Management']);
+        return view('register', ['title' => 'OAS | Register']);
     }
 
     public function register(Request $request)

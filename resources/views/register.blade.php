@@ -5,10 +5,10 @@
         <div>
             <div>
 
-                <h1 class="logo-name">OAS+</h1>
+                <h1 class="logo-name">OAS</h1>
 
             </div>
-            <h3>Register to OAS+</h3>
+            <h3>Register to OAS</h3>
             <p>Create account to see it in action.</p>
             <form class="m-t" role="form" action="{{ route('register-user') }}" method="POST">
                 @csrf
