@@ -11,7 +11,7 @@ class nomors extends Controller
     public function index()
     {
         $nomors = Nomor::all();
-        return view('dashboard', ['title' => 'OAS | Rotator Management', 'nomors' => $nomors]);
+        return view('dashboard', ['title' => 'ORS | Rotator Management', 'nomors' => $nomors]);
     }
 
     // Menampilkan form untuk membuat nomor baru
@@ -76,7 +76,7 @@ class nomors extends Controller
         $nomors = $results; // Or you can load all nomors if $results is empty
 
         return view('dashboard', [
-            'title' => 'OAS+ | Rotator Management',
+            'title' => 'ORS | Rotator Management',
             'nomors' => $nomors,
             'results' => $results,
             'query' => $query

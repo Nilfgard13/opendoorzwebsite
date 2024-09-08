@@ -32,14 +32,26 @@
                     <h1 class="logo-name">ORS</h1>
                     <form class="m-t" role="form" action="/login" method="POST">
                         @csrf
+
+                        {{-- Menampilkan error message --}}
+                        @if ($errors->has('email'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('email') }}
+                            </div>
+                        @endif
+
+                        {{-- Input email tanpa old value --}}
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Email" name="email"
                                 required="">
                         </div>
+
+                        {{-- Input password --}}
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Password" name="password"
                                 required="">
                         </div>
+
                         <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
                         {{-- <a href="/forget">
@@ -50,13 +62,15 @@
                             <small>Do not have an account?</small>
                         </p>
                         <a class="btn btn-sm btn-white btn-block" href="{{ route('register') }}">Create an account</a> --}}
+
                     </form>
 
                     <p class="m-t">
-                        <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+                        <small>Inspinia web app framework base on Bootstrap 3 &copy; 2014</small>
                     </p>
                 </div>
             </div>
+
         </div>
         <hr />
         <div class="row">
@@ -64,7 +78,7 @@
                 <footer class="text-center py-3">
                     <p>&copy; {{ date('Y') }} Opendoorz Real Estate. All rights reserved.</p>
                 </footer>
-                
+
             </div>
 
         </div>
@@ -74,3 +88,5 @@
     </div>
 
 </x-layout_login>
+
+<img src="" alt="">

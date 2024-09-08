@@ -11,12 +11,12 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('index', ['title' => 'OAS | Login']);
+        return view('index', ['title' => 'ORS | Login']);
     }
 
     public function showRegisterForm()
     {
-        return view('register', ['title' => 'OAS | Register']);
+        return view('register', ['title' => 'ORS | Register']);
     }
 
     public function register(Request $request)
@@ -40,16 +40,37 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        // $credentials = $request->only('email', 'password');
 
+        // if (Auth::attempt($credentials)) {
+        //     $request->session()->regenerate();
+        //     $request->flash();
+        //     $request->session()->flash('success', 'Login berhasil!');
+        //     return redirect()->intended('admin');
+        // }else{
+        //     $request->session()->flash('error', 'Login gagal! Periksa email atau password Anda.');
+        //     return redirect()->back();
+        // }
+
+        // return back()->withErrors([
+        //     'email' => 'The provided credentials do not match our records.',
+        // ]);
+
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Percobaan login
         if (Auth::attempt($credentials)) {
+            // Jika login berhasil
             $request->session()->regenerate();
-
             return redirect()->intended('admin');
         }
 
+        // Jika login gagal, kembalikan dengan error tanpa flash input
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email atau password salah.',
         ]);
     }
 
